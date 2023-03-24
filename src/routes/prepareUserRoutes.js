@@ -200,12 +200,17 @@ const prepareUserRoutes = ({ app }) => {
           return
         }
 
+        const [passwordHash, passwordSalt] = password
+          ? await hashPassword(password)
+          : [null, null]
+
         const updatedUser = await UsersModel.query()
           .update({
             ...(email ? { email } : {}),
             ...(firstName ? { firstName } : {}),
             ...(lastName ? { lastName } : {}),
-            ...(password ? { password } : {}),
+            ...(passwordHash ? { passwordHash } : {}),
+            ...(passwordSalt ? { passwordSalt } : {}),
             ...(role ? { role } : {}),
           })
           .where({
