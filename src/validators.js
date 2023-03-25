@@ -33,7 +33,7 @@ export const limitValidator = yup.number().integer().min(1).max(100).default(5)
 export const orderValidator = yup.string().lowercase().oneOf(["asc", "desc"])
 export const orderFieldValidator = (fields) => yup.string().oneOf(fields)
 
-export const pageValidator = yup.number().integer().min(1).default(1)
+export const pageValidator = yup.number().integer()
 
 export const filterValidator = (fields) =>
   yup.string().lowercase().oneOf(fields)
