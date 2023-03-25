@@ -46,7 +46,7 @@ const preparePageRoutes = ({ app }) => {
         return
       }
 
-      const query = await PagesModel.query().page(page, limit)
+      const query = PagesModel.query().page(page, limit)
 
       if (orderField) {
         query.orderBy(orderField, order)
@@ -60,8 +60,10 @@ const preparePageRoutes = ({ app }) => {
         query.where("status", filterStatus)
       }
 
+      const pages = await query
+
       res.send({
-        result: query,
+        result: pages,
       })
     }
   )
